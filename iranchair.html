@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>مبلمان ایران | نسخه حرفه‌ای</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:Vazirmatn;
+  background:#0b0b0b;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  background:radial-gradient(circle,#1a1a1a,#0b0b0b);
+  z-index:9999;
+}
+#intro h1{color:#d4af37;font-size:56px;}
+#intro p{color:#aaa;margin-top:10px;}
+#intro button{
+  margin-top:20px;
+  padding:12px 28px;
+  border:1px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  cursor:pointer;
+}
+#intro button:hover{background:#d4af37;color:#000;}
+
+#app{display:none;}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(18px);
+  z-index:1000;
+  border-bottom:1px solid #222;
+}
+
+.logo{color:#d4af37;font-weight:600;}
+
+.nav-right{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.nav-item{
+  cursor:pointer;
+  color:#aaa;
+  font-size:13px;
+}
+.nav-item:hover{color:#d4af37;}
+
+/* CART BADGE */
+.cart-btn{
+  position:relative;
+  cursor:pointer;
+  color:#aaa;
+}
+.badge{
+  position:absolute;
+  top:-8px;
+  left:-10px;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#000;
+  font-size:11px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.hero h1{color:#d4af37;font-size:58px;}
+.hero p{color:#aaa;margin-top:10px;}
+.hero button{
+  margin-top:20px;
+  padding:12px 28px;
+  border:1px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  cursor:pointer;
+}
+
+/* PRODUCTS */
+.scroll{
+  display:flex;
+  overflow-x:auto;
+  gap:16px;
+  padding:120px 20px 20px;
+}
+
+.card{
+  min-width:240px;
+  background:#111;
+  border:1px solid #222;
+  border-radius:12px;
+  overflow:hidden;
+  transition:.3s;
+}
+.card:hover{transform:translateY(-5px);border-color:#d4af37;}
+
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
+
+.card-body{padding:10px;}
+.card-body h3{font-size:13px;}
+.card-body p{font-size:12px;color:#aaa;}
+
+.btn{
+  margin-top:6px;
+  padding:6px 10px;
+  border:1px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  cursor:pointer;
+  font-size:12px;
+}
+
+/* CART */
+.drawer{
+  position:fixed;
+  top:0;
+  right:-360px;
+  width:360px;
+  height:100%;
+  background:#111;
+  border-left:1px solid #333;
+  transition:.3s;
+  padding:20px;
+  z-index:2000;
+}
+.drawer.active{right:0;}
+
+.cart-item{
+  font-size:12px;
+  color:#aaa;
+  margin-top:8px;
+}
+.total{
+  margin-top:15px;
+  color:#d4af37;
+  font-weight:600;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
+}
+
+.modal-content{
+  width:600px;
+  background:#111;
+  border:1px solid #333;
+  padding:15px;
+  border-radius:12px;
+}
+
+.modal img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.back{
+  margin-top:10px;
+  color:#d4af37;
+  cursor:pointer;
+}
+
+/* SUPPORT */
+.support{
+  padding:15px;
+  background:#111;
+  border:1px solid #222;
+  border-radius:10px;
+}
+
+/* COMMENT */
+.comment{
+  margin-top:8px;
+  padding:8px;
+  border-left:2px solid #d4af37;
+  font-size:12px;
+  color:#aaa;
+}
+
+input,textarea{
+  width:100%;
+  padding:8px;
+  margin-top:6px;
+  background:#0b0b0b;
+  border:1px solid #333;
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <h1>مبلمان ایران</h1>
+  <p>تجربه‌ای لوکس و حرفه‌ای</p>
+  <button onclick="start()">بریم!</button>
+</div>
+
+<div id="app">
+
+<!-- NAV -->
+<nav>
+  <div class="logo">مبلمان ایران</div>
+
+  <div class="nav-right">
+    <div class="nav-item" onclick="scrollTop()">خانه</div>
+    <div class="nav-item" onclick="scrollProducts()">محصولات</div>
+
+    <div class="cart-btn" onclick="toggleCart()">
+      🛒 سبد
+      <div class="badge" id="badge">0</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>طراحی برای زندگی بهتر</h1>
+  <p>هر محصول یک تجربه واقعی از کیفیت</p>
+  <button onclick="scrollProducts()">رفتن به محصولات</button>
+</section>
+
+<!-- PRODUCTS -->
+<div class="scroll" id="list"></div>
+
+<!-- SUPPORT -->
+<section style="padding:40px 20px;">
+  <h2 style="color:#d4af37;margin-bottom:10px;">پشتیبانی</h2>
+  <div class="support">
+    شماره تماس: ۰۹۲۲۶۳۹۹۰۵۷
+  </div>
+</section>
+
+<!-- COMMENTS -->
+<section style="padding:40px 20px;">
+  <h2 style="color:#d4af37">کامنت کاربران</h2>
+
+  <input id="name" placeholder="نام">
+  <textarea id="text" placeholder="نظر"></textarea>
+  <button class="btn" onclick="addComment()">ثبت</button>
+
+  <div id="comments"></div>
+</section>
+
+</div>
+
+<!-- CART -->
+<div class="drawer" id="drawer">
+  <h3 style="color:#d4af37">سبد خرید</h3>
+  <div id="cartList"></div>
+  <div class="total" id="total"></div>
+
+  <div class="back" onclick="toggleCart()">← بستن</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalBox"></div>
+</div>
+
+<script>
+
+function start(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("app").style.display="block";
+}
+
+/* DATA */
+const products=[
+{
+name:"مبل کلاسیک",
+price:18500000,
+wood:"چوب راش",
+made:"ایران",
+warranty:"۳۶ ماه",
+img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"
+},
+{
+name:"مبل مدرن",
+price:11200000,
+wood:"بلوط",
+made:"ترکیه",
+warranty:"۲۴ ماه",
+img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc"
+},
+{
+name:"ست ناهارخوری",
+price:24500000,
+wood:"گردو طبیعی",
+made:"ایتالیا",
+warranty:"۳۶ ماه",
+img:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6"
+},
+{
+name:"کاناپه VIP",
+price:13900000,
+wood:"فلز تقویت‌شده",
+made:"ایران",
+warranty:"۲۴ ماه",
+img:"https://images.unsplash.com/photo-1507089947368-19c1da9775ae"
+},
+{
+name:"میز چوبی",
+price:5200000,
+wood:"MDF ضدخش",
+made:"ایران",
+warranty:"۱۸ ماه",
+img:"https://images.unsplash.com/photo-1549497538-303791108f95"
+},
+{
+name:"کتابخانه",
+price:9800000,
+wood:"بلوط",
+made:"آلمان",
+warranty:"۲۴ ماه",
+img:"https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
+},
+{
+name:"صندلی لوکس",
+price:4100000,
+wood:"چوب + فوم سرد",
+made:"ایران",
+warranty:"۱۲ ماه",
+img:"https://images.unsplash.com/photo-1501045661006-fcebe0257c3f"
+}
+];
+
+let cart=[];
+
+/* RENDER */
+const list=document.getElementById("list");
+
+products.forEach((p,i)=>{
+  list.innerHTML+=`
+    <div class="card">
+      <img src="${p.img}">
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <p>${p.price.toLocaleString()} تومان</p>
+
+        <button class="btn" onclick="add(${i})">افزودن</button>
+        <button class="btn" onclick="openModal(${i})">جزئیات</button>
+      </div>
+    </div>
+  `;
+});
+
+/* CART */
+function add(i){
+  cart.push(products[i]);
+  updateCart();
+}
+
+function updateCart(){
+  document.getElementById("badge").style.display="flex";
+  document.getElementById("badge").innerText=cart.length;
+
+  document.getElementById("cartList").innerHTML=
+  cart.map(c=>`<div class="cart-item">${c.name}</div>`).join("");
+
+  let total=cart.reduce((a,b)=>a+b.price,0);
+  document.getElementById("total").innerText=
+  "جمع کل: " + total.toLocaleString() + " تومان";
+}
+
+function toggleCart(){
+  document.getElementById("drawer").classList.toggle("active");
+}
+
+/* MODAL */
+function openModal(i){
+  const p=products[i];
+
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("modalBox").innerHTML=`
+    <img src="${p.img}">
+    <h3 style="color:#d4af37">${p.name}</h3>
+
+    <p style="color:#aaa">جنس: ${p.wood}</p>
+    <p style="color:#aaa">ساخت: ${p.made}</p>
+    <p style="color:#aaa">گارانتی: ${p.warranty}</p>
+    <p style="color:#aaa">قیمت: ${p.price.toLocaleString()}</p>
+
+    <button class="btn" onclick="add(${i})">افزودن</button>
+    <div class="back" onclick="closeModal()">← بازگشت</div>
+  `;
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+/* NAV */
+function scrollProducts(){
+  document.getElementById("list").scrollIntoView({behavior:"smooth"});
+}
+function scrollTop(){
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* COMMENTS */
+function addComment(){
+  const n=document.getElementById("name").value;
+  const t=document.getElementById("text").value;
+
+  const d=document.createElement("div");
+  d.className="comment";
+  d.textContent=n+" : "+t;
+
+  document.getElementById("comments").appendChild(d);
+}
+
+</script>
+
+</body>
+</html>
